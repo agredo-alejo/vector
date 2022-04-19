@@ -1,4 +1,8 @@
-
+/**
+ * @param {Number} [x] x component of the vector
+ * @param {Number} [y] y component of the vector
+ * @param {Number} [z] z component of the vector
+ */
 export class Vector {
     x: number; y: number; z: number
     constructor(x = 0, y = 0, z = 0) {
@@ -6,33 +10,43 @@ export class Vector {
         this.y = y
         this.z = z
     }
-    add(x: Vector | number, y: number, z: number) {
-        if (x instanceof Vector) {
-            this.x += x.x
-            this.y += x.y
-            this.z += x.z
+    /**
+     * @param x Number | Vector
+     * @param y Number, by default it is equal to zero
+     * @param z Number, by default it is equal to zero
+     */
+    add(x: Vector | number, y = 0, z = 0) {
+        if (typeof x === "number") {
+            this.x += x
+            this.y += y
+            this.z += z
             return this
         }
-        this.x += x
-        this.y += y
-        this.z += z
+        this.x += x.x
+        this.y += x.y
+        this.z += x.z
         return this
     }
-    sub(x: Vector | number, y: number, z: number) {
-        if (x instanceof Vector) {
-            this.x -= x.x
-            this.y -= x.y
-            this.z -= x.z
+    /**
+     * @param x Number | Vector
+     * @param y Number, by default it is equal to zero
+     * @param z Number, by default it is equal to zero
+     */
+    sub(x: Vector | number, y = 0, z = 0) {
+        if (typeof x === "number") {
+            this.x -= x
+            this.y -= y
+            this.z -= z
             return this
         }
-        this.x -= x
-        this.y -= y
-        this.z -= z
+        this.x -= x.x
+        this.y -= x.y
+        this.z -= x.z
         return this
     }
     /**
      * 
-     * @param factor must be a finite number otherwise the method will return the object without modifications
+     * @param factor must be a finite number otherwise the method will return the vector without modifications
      */
     mult(factor: number) {
         if (!isFinite(factor)) return this
@@ -43,7 +57,7 @@ export class Vector {
     }
     /**
      * 
-     * @param divisor must be a finite number and different than 0 otherwise the method will return the object without modifications
+     * @param divisor must be a finite number and different than 0 otherwise the method will return the vector without modifications
      */
     div(divisor: number) {
         if (!(isFinite(divisor)) ||
@@ -54,16 +68,23 @@ export class Vector {
         this.z /= divisor
         return this
     }
-    set(x: Vector | number, y: number, z: number) {
-        if (x instanceof Vector) {
+    /**
+     * @param x Number | Vector
+     * @param y Number, by default it is equal to zero
+     * @param z Number, by default it is equal to zero
+     */
+    set(x: Vector | number, y = 0, z = 0) {
+
+        if (!(typeof x == "number")) {
             this.x = x.x
             this.y = x.y
             this.z = x.z
             return this
         }
+
         this.x = x
-        this.y = y
-        this.z = z
+        this.y = x
+        this.z = x
         return this
     }
     copy() {
@@ -99,7 +120,7 @@ export class Vector {
     }
 
     equals(vector: Vector) {
-        return this.x == vector.x && this.y == vector.y && this.z == vector.z
+        return this.x === vector.x && this.y === vector.y && this.z === vector.z
     }
 
     dist(vector: Vector) {
@@ -157,7 +178,18 @@ export class Vector {
         return [this.x, this.y, this.z]
     }
 
-    changeOfBasis(vi: Vector = new Vector(1), vj: Vector = new Vector(0, 1), vk: Vector = new Vector(0, 0, 1)) {
+    /**
+     * Change of basis is a technique applied to finite-dimensional vector spaces in order to rewrite vectors in terms of a different set of basis elements. It is useful for many types of matrix computations in linear algebra and can be viewed as a type of linear transformation.
+     * 
+     * @param vi Basis vector Î
+     * @param vj Basis vector ĵ
+     * @param vk Basis vector k̂
+     */
+    changeOfBasis(
+        vi: Vector = new Vector(1),
+        vj: Vector = new Vector(0, 1),
+        vk: Vector = new Vector(0, 0, 1)
+    ) {
         let x = this.x, y = this.y, z = this.z
         this.x = x * vi.x + y * vj.x + z * vk.x
         this.y = x * vi.y + y * vj.y + z * vk.y
@@ -166,7 +198,7 @@ export class Vector {
     }
 
     /**
-     * The lerp method gives you a point that is a fraction of the way along a line between the start and end point. The fraction is supplied as the alpha parameter
+     * The lerp method stands for linear interpolation and gives you a point that is a fraction of the way along a line between the start and end point. The fraction is supplied as the alpha parameter
      * @param alpha It is constrained to be in the range [0, 1]
      */
     lerp(vector: Vector, alpha: number) {

@@ -1,2 +1,2 @@
 export * from "./vectorClass"
-export * from "./staticFnVector"
+// export * from "./staticFnVector"
