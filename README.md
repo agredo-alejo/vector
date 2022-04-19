@@ -11,3 +11,9 @@ A vector is an entity that has direction and magnitude. Geometrically it is repr
 
 [MIT](https://choosealicense.com/licenses/mit/)
 
+## Installation
+
+```bash
+  npm install @apjs/vector
+```
+    
