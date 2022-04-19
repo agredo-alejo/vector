@@ -257,4 +257,6 @@ export class Vector {
         this.z = x * -sinOfAngle + this.z * cosOfAngle || 0
         return this
     }
+
+    
 }
