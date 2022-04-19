@@ -12,10 +12,17 @@
     "url": "git+https://github.com/agredo-alejo/vector.git"
   },
   "keywords": [
-    "vector"
+    "vector",
+    "vectors",
+    "math",
+    "mathematics",
+    "linear algebra",
+    "geometry",
+    "gamedev",
+    "typescript"
   ],
   "author": "agredoalejo",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/agredo-alejo/vector/issues"
   },
