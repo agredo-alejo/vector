@@ -1,4 +1,5 @@
 import { Vector } from "./vectorClass";
+export { Vector }
 /**
  * If the parameter x is a vector, a new vector will be returned as the result of the elementwise addition.
  * @param vector Vector
