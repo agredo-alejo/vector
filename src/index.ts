@@ -76,11 +76,11 @@ export const setMag = (vector: Vector, mag: number) => {
 }
 
 export const max = (vector: Vector, otherVector: Vector) => {
-    return vector.mag() > otherVector.mag() ? vector.copy() : otherVector.copy()
+    return vector.mag > otherVector.mag ? vector.copy() : otherVector.copy()
 }
 
 export const min = (vector: Vector, otherVector: Vector) => {
-    return vector.mag() < otherVector.mag() ? vector.copy() : otherVector.copy()
+    return vector.mag < otherVector.mag ? vector.copy() : otherVector.copy()
 }
 
 export const equals = (vector: Vector, otherVector: Vector) => {
@@ -147,7 +147,7 @@ export const lerp = (vector: Vector, otherVector: Vector, alpha: number) => {
 }
 
 export const angleBetween = (vector: Vector, otherVector: Vector) => {
-    let magMult = vector.mag() * otherVector.mag()
+    let magMult = vector.mag * otherVector.mag
     if (magMult !== 0) {
         let dotOverMag = vector.dot(otherVector) / magMult
         return Math.acos(Math.max(Math.min(dotOverMag, 1), -1))

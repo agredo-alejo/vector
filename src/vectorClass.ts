@@ -95,10 +95,13 @@ export class Vector {
         return this.x * this.x + this.y * this.y + this.z * this.z
     }
 
-    mag() {
+    get mag() {
         return Math.hypot(this.x, this.y, this.z)
     }
 
+    set mag (mag: number) {
+        this.div(this.mag).mult(mag)
+    }
     /**
      * If the magnitude of the vector is equal to zero, the normalize method will convert the vector to a zero vector.
      */
@@ -107,16 +110,13 @@ export class Vector {
         return mag === 0 ? this.set(0, 0, 0) : this.div(mag)
     }
 
-    setMag(mag: number) {
-        return this.div(this.mag()).mult(mag)
-    }
 
     max(vector: Vector) {
-        return this.mag() > vector.mag() ? this : vector
+        return this.mag > vector.mag ? this : vector
     }
 
     min(vector: Vector) {
-        return this.mag() < vector.mag() ? this : vector
+        return this.mag < vector.mag ? this : vector
     }
 
     equals(vector: Vector) {
@@ -213,7 +213,7 @@ export class Vector {
      * If the product of both vectors is equal to 0 the method will return 0
      */
     angleBetween(vector: Vector) {
-        let magMult = this.mag() * vector.mag()
+        let magMult = this.mag * vector.mag
         if (magMult == 0) return 0
 
         let dotOverMag = this.dot(vector) / magMult
@@ -221,14 +221,30 @@ export class Vector {
 
     }
 
-    heading3D() {
+    /**
+     * A vector's direction is measured by the angle it makes with a horizontal line.
+     */
+    get direction() {
+        return Math.atan2(this.y, this.x)
+    }
+    set direction(angle: number) {
+        this.x = Math.cos(angle)
+        this.y = Math.sin(angle)
+    }
+
+    /**
+     * The direction of a 3d vector in the spherical coordinate system [ polar, azimuth ]
+     */
+    set direction3D(angles: number[]) {
+        this.x = Math.sin(angles[1]) * Math.cos(angles[0])
+        this.y = Math.sin(angles[1]) * Math.sin(angles[0])
+        this.z = Math.cos(angles[1])
+    }
+    get direction3D() {
         return [
             Math.atan2(this.y, this.x),
             Math.atan2(Math.hypot(this.x, this.y), this.z)
         ]
-    }
-    heading() {
-        return Math.atan2(this.y, this.x)
     }
 
     rotate(angle: number) {
