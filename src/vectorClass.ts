@@ -83,8 +83,8 @@ export class Vector {
         }
 
         this.x = x
-        this.y = x
-        this.z = x
+        this.y = y
+        this.z = z
         return this
     }
     copy() {
