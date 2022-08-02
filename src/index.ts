@@ -148,10 +148,10 @@ export const lerp = (vector: Vector, otherVector: Vector, alpha: number) => {
 
 export const angleBetween = (vector: Vector, otherVector: Vector) => {
     let magMult = vector.mag * otherVector.mag
-    if (magMult !== 0) {
-        let dotOverMag = vector.dot(otherVector) / magMult
-        return Math.acos(Math.max(Math.min(dotOverMag, 1), -1))
-    }
+    if (magMult === 0) return 0
+    
+    let dotOverMag = vector.dot(otherVector) / magMult
+    return Math.acos(Math.max(Math.min(dotOverMag, 1), -1))
 }
 
 export const rotate = (vector: Vector, angle: number) => {
